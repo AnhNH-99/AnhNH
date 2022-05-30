@@ -13,17 +13,17 @@ namespace AnhNH.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Content> builder)
         {
-            builder.ToTable("CONTENT");
+            builder.ToTable("Contents");
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).HasColumnName("ID").ValueGeneratedOnAdd();
-            builder.Property(x => x.Name).HasColumnName("NAME").HasMaxLength(256);
-            builder.Property(x => x.ChapterId).HasColumnName("CHAPTER_ID");
-            builder.Property(x => x.BaseImage).HasColumnName("BASE_IMAGE").HasColumnType("text").IsRequired();
-            builder.Property(x => x.CreatedAt).HasColumnName("CREATED_AT").HasColumnType("datetime");
-            builder.Property(x => x.UpdatedAt).HasColumnName("UPDATED_AT").HasColumnType("datetime");
-            builder.Property(x => x.CreatedBy).HasColumnName("CREATED_BY").HasMaxLength(256);
-            builder.Property(x => x.UpdatedBy).HasColumnName("UPDATED_BY").HasMaxLength(256);
-            builder.Property(x => x.DeletedFlag).HasColumnName("DELETED_FLAG").HasDefaultValue(false);
+            builder.Property(x => x.Id).UseIdentityColumn();
+            builder.Property(x => x.Name).HasMaxLength(256).IsRequired();
+            builder.Property(x => x.ChapterId).IsRequired();
+            builder.Property(x => x.BaseImage).HasColumnType("text").IsRequired();
+            builder.Property(x => x.CreatedAt).HasColumnType("datetime");
+            builder.Property(x => x.UpdatedAt).HasColumnType("datetime");
+            builder.Property(x => x.CreatedBy).HasMaxLength(256);
+            builder.Property(x => x.UpdatedBy).HasMaxLength(256);
+            builder.Property(x => x.DeletedFlag).HasDefaultValue(false);
             builder.HasOne(x => x.Chapter).WithMany(y => y.Contents).HasForeignKey(z => z.ChapterId);
         }
     }

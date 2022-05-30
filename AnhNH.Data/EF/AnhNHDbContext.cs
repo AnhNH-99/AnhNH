@@ -1,4 +1,6 @@
-﻿using AnhNH.Data.Entities;
+﻿using AnhNH.Data.Configurations;
+using AnhNH.Data.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,11 +10,17 @@ using System.Threading.Tasks;
 
 namespace AnhNH.Data.EF
 {
-    public class AnhNHDbContext:DbContext
+    public class AnhNHDbContext:IdentityDbContext<AppUser, AppRole, Guid>
     {
         public AnhNHDbContext(DbContextOptions options) : base(options)
         {
 
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new StoryConfiguration());
+            modelBuilder.ApplyConfiguration(new ChapterConfiguration());
+            modelBuilder.ApplyConfiguration(new ContentConfiguration());
         }
         public DbSet<Story> Stories { get; set; }
         public DbSet<Chapter> Chapters { get; set; }

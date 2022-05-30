@@ -13,22 +13,22 @@ namespace AnhNH.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Story> builder)
         {
-            builder.ToTable("STORY");
+            builder.ToTable("Stories");
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).HasColumnName("ID").ValueGeneratedOnAdd();
-            builder.Property(x => x.Name).HasColumnName("NAME").IsRequired();
-            builder.Property(x => x.Title).HasColumnName("TITLE");
-            builder.Property(x => x.Description).HasColumnName("DESCRIPTION").HasColumnType("text");
-            builder.Property(x => x.Status).HasColumnName("STATUS").HasDefaultValue(0);
-            builder.Property(x => x.Author).HasColumnName("AUTHOR").IsRequired();
-            builder.Property(x => x.Views).HasColumnName("VIEWS").HasDefaultValue(0);
-            builder.Property(x => x.Follows).HasColumnName("FOLLOWS").HasDefaultValue(0);
-            builder.Property(x => x.Likes).HasColumnName("LIKES").HasDefaultValue(0);
-            builder.Property(x => x.CreatedAt).HasColumnName("CREATED_AT").HasColumnType("datetime");
-            builder.Property(x => x.UpdatedAt).HasColumnName("UPDATED_AT").HasColumnType("datetime");
-            builder.Property(x => x.CreatedBy).HasColumnName("CREATED_BY").HasMaxLength(256);
-            builder.Property(x => x.UpdatedBy).HasColumnName("UPDATED_BY").HasMaxLength(256);
-            builder.Property(x => x.DeletedFlag).HasColumnName("DELETED_FLAG").HasDefaultValue(false);
+            builder.Property(x => x.Id).UseIdentityColumn();
+            builder.Property(x => x.Name).IsRequired();
+            builder.Property(x => x.Title).IsRequired();
+            builder.Property(x => x.Description).HasColumnType("text");
+            builder.Property(x => x.Status).HasDefaultValue(0);
+            builder.Property(x => x.Author).IsRequired();
+            builder.Property(x => x.Views).HasDefaultValue(0);
+            builder.Property(x => x.Follows).HasDefaultValue(0);
+            builder.Property(x => x.Likes).HasDefaultValue(0);
+            builder.Property(x => x.CreatedAt).HasColumnType("datetime");
+            builder.Property(x => x.UpdatedAt).HasColumnType("datetime");
+            builder.Property(x => x.CreatedBy).HasMaxLength(256);
+            builder.Property(x => x.UpdatedBy).HasMaxLength(256);
+            builder.Property(x => x.DeletedFlag).HasDefaultValue(false);
         }
     }
 }
