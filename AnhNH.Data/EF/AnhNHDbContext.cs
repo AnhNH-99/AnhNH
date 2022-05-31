@@ -1,5 +1,6 @@
 ﻿using AnhNH.Data.Configurations;
 using AnhNH.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,6 +22,16 @@ namespace AnhNH.Data.EF
             modelBuilder.ApplyConfiguration(new StoryConfiguration());
             modelBuilder.ApplyConfiguration(new ChapterConfiguration());
             modelBuilder.ApplyConfiguration(new ContentConfiguration());
+
+            modelBuilder.ApplyConfiguration(new AppUserConfiguration());
+            modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
+
+            modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
+            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new {x.UserId, x.RoleId});
+            modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
+
+            modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
+            modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
         }
         public DbSet<Story> Stories { get; set; }
         public DbSet<Chapter> Chapters { get; set; }
