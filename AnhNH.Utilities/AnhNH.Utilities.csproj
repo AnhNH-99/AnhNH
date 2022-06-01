@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\AnhNH.Data\AnhNH.Data.csproj" />
-    <ProjectReference Include="..\AnhNH.Utilities\AnhNH.Utilities.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AnhNH.Application.Services.Stories
 {
-    public interface IManageProductService
+    public interface IManageStoryService
     {
         Task<int> Create(StoryCreateRequest request);
         Task<int> Update(StoryUpdateRequest request);

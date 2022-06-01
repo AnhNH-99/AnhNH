@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AnhNH.Application.Services.Stories
 {
-    public interface IPublicProductService
+    public interface IPublicStoryService
     {
     }
 }
